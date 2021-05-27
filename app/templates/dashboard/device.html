@@ -1,0 +1,33 @@
+{% extends 'base_with_sidebar.html' %}
+{% block title %}
+{{ device.name }}
+{% endblock %}
+{% block navbar_content %}
+<p class="text-dark font-weight-bold">{{ device.name }}</p>
+{% endblock %}
+{% block sidebar_content %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+  <div class="d-flex justify-content-between">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="date" class="form-control">
+        <input type="date" class="form-control">
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </div>
+    </form>
+    <form class="form-inline">
+      <input type="text" class="form-control">
+    </form>
+  </div>
+  <div id="chartDiv" class="container-canvas">
+    <canvas id="chartCanvas"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      const device_data = JSON.parse({{ data | tojson | safe }});
+      const data_type = '{{ type }}';
+  </script>
+  <script src="{{ url_for('static', filename='device_chart.js') }}"></script>
+{% endblock %}

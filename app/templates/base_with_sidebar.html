@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script src="{{ url_for('static', filename='sidebar_toggle.js') }}"></script>
+
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar" class="bg-light">
+    <div class="sidebar-header bg-light">
+      <h3>{{ current_user.login }}</h3>
+    </div>
+
+    <ul class="list-unstyled components bg-light">
+      <li>
+        <a href="{{ url_for('dashboard.index') }}">Devices</a>
+      </li>
+      <li>
+        <a href="#">Users</a>
+      </li>
+      <li>
+        <a href="#managementSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Management</a>
+        <ul class="collapse list-unstyled" id="managementSubmenu">
+          <li>
+            <a href="{{ url_for('conversion.conversions') }}">Conversion</a>
+          </li>
+          <li>
+            <a href="#">Daemon</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="d-flex w-100 justify-content-center bg-light">
+      <form method="post" action="{{ url_for('login.logout') }}">
+        <button class="btn btn-danger" type="submit">Log Out</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Page content -->
+  <div id="content" class="w-100 align-right">
+    <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+      <div class="container-fluid">
+        <button type="button" id="sidebarCollapseButton" class="btn btn-primary">
+          <i class="fas fa-align-left"></i>
+        </button>
+        {% block navbar_content %}
+        {% endblock %}
+      </div>
+    </nav>
+    <div class="container-fluid">
+      {% block sidebar_content %}
+      {% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

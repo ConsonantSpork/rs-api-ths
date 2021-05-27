@@ -1,0 +1,31 @@
+{% extends 'base_with_sidebar.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block navbar_content %}
+  <form method="get" action="{{ url_for('conversion.add') }}">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+{% endblock %}
+{% block sidebar_content %}
+<div class="w-100">
+  {% if convs %}
+  <table class="table table-striped td-align-middle">
+    <thead>
+    <tr>
+      <th width="60%">Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for conv in convs %}
+    <tr>
+      <td>
+        <a href="{{ url_for('conversion.conversion', id=conv.id) }}">{{ conv.name }}</a>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center">No converters defined.</p>
+  {% endif %}
+</div>
+{% endblock %}

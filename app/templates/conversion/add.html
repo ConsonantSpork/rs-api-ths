@@ -1,0 +1,24 @@
+{% extends 'base_with_sidebar.html' %}
+{% from "helpers/render_field.html" import render_field %}
+{% block title %}Add a conversion{% endblock %}
+{% block sidebar_content %}
+<script src="{{ url_for('static', filename='lib/codemirror/codemirror.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='lib/codemirror/codemirror.css') }}">
+<script src="{{ url_for('static', filename='lib/codemirror/javascript.js') }}"></script>
+<div class="mw-100">
+<form method="post">
+  <dl>
+    {{ render_field(form.name) }}
+    {{ render_field(form.description) }}
+    {{ render_field(form.source) }}
+  </dl>
+  <input type="submit" class="btn btn-primary w-100" value="Add">
+</form>
+</div>
+
+<script>
+  var myCodeMirror = CodeMirror.fromTextArea($('#source')[0],
+    {lineNumbers: true}
+  );
+</script>
+{% endblock %}

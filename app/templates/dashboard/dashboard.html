@@ -1,0 +1,29 @@
+{% extends 'base_with_sidebar.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block navbar_content %}
+<form method="get" action="{{ url_for('dashboard.add') }}">
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+{% endblock %}
+{% block sidebar_content %}
+<div class="w-100">
+<table class="table table-striped td-align-middle">
+  <thead>
+    <tr>
+      <th width="60%">Name</th>
+      <th width="40%">Latest Reading</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for dev in devs %}
+    <tr>
+      <td>
+        <a href="{{ url_for('dashboard.device', id=dev.id) }}">{{ dev.name }}</a>
+      </td>
+      <td>123</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
